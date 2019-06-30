@@ -3,7 +3,6 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 import { LayoutComponent } from './layout/layout.component';
-import { LoginComponent } from './log-in/log-in.component';
 import { HeaderComponent } from './header/header.component';
 
 @NgModule({
@@ -14,12 +13,10 @@ import { HeaderComponent } from './header/header.component';
   ],
   declarations: [
     LayoutComponent,
-    LoginComponent,
     HeaderComponent,
   ],
   exports: [
     LayoutComponent,
-    LoginComponent
   ],
   providers: [],
   schemas: [

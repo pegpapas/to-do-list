@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { MainModule } from './modules/main/main.module';
 
 import { AppComponent } from './modules/main/app/app.component';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ import { AppComponent } from './modules/main/app/app.component';
     AppRoutingModule,
     // SharedModule,
     MainModule,
+    StoreModule.forRoot({})
   ],
   declarations: [
     AppComponent,

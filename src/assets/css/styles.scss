@@ -68,16 +68,15 @@ body{
         padding: var(--card-padding);
         margin: var(--card-margin);
 
+        hr{
+          margin: 15px 0px 0px 0px; 
+        }
         .card-body-content{
           border-radius: 2px;
 
           .checkbox{
             text-align: center;
           }
-        }
-        .card-body-content:hover{
-          background-color: #d6d3d3;
-          border-radius: 2px;
         }
       }
     }

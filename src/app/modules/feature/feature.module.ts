@@ -1,25 +1,30 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-// import { SharedModule } from 'src/app/shared/shared.module';
 import { FeatureRoutingModule } from './feature-routing.module';
 
-import { ToDoListComponent } from './to-do-list/to-do-list.component';
+import { StoreModule } from '@ngrx/store';
+import { reducers } from './store';
 
+import { ToDoListComponent } from './to-do-list/to-do-list.component';
+import { EditToDoItemComponent } from './edit-to-do-item/edit-to-do-item.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    // SharedModule,
     FeatureRoutingModule,
+    StoreModule.forFeature('feature', reducers)
   ],
   declarations: [
-    ToDoListComponent
+    ToDoListComponent,
+    EditToDoItemComponent
   ],
   exports: [
-    ToDoListComponent
+    ToDoListComponent,
+    EditToDoItemComponent
   ],
   entryComponents: [
     ToDoListComponent,
+    EditToDoItemComponent
   ],
   providers: [],
   schemas: [
