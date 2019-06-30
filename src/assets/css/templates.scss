@@ -2,7 +2,6 @@ body {
   --html-background-color: #335533;
   --body-background-color: #f8f8fa;
   --page-header-background-color: #f8f8fb;
-  --sidebar-background-color:#f8f8fb;
   --main-layout-background-color:transparent;
   --card-background-color:#f8f8fb;
   --card-header-background-color:#8f616d;
@@ -10,26 +9,13 @@ body {
 
   --header-color: linear-gradient(rgb(243, 243, 243), rgb(226, 226, 226));
   --footer-color: rgb(42, 39, 37);
-  //--sidebar-color: linear-gradient(to right, rgb(58, 54, 51) 93%, rgb(42, 39, 37) 100%);
-  --sidebar-color:#001b38;
-  --sidebar-navigation-submenu: #001b38;
-  --sidebar-navigation-menu-hover: rgba(100, 100, 100, 0.4);
 
   --selected-text-color: rgb(175, 175, 175);
   --font-color-footer: rgb(255, 255, 255);
   --font-color-sidebar: rgb(192, 187, 183);;
   --font-color-sidebar-highlight: rgb(255, 255, 255);
 
-  --sidebar-width: 250px;
-  --sidebar-height: 94.5%;
-  --sidebar-index: 2;
-  --sidebar-padding: 10px;
-  --sidebar-margin: 5px 0px 5px 5px;
-  --sidebar-box-shadow: 2px 3px 0px 0px rgba(0.1, 0.1, 0.1, 0.1);
-
-  --user-preferences-height: 180px;
-
-  --header-height: 5%;
+  --header-height: 7%;
   --header-width: 100%;
   --header-index: 3;
   --header-padding: 0px;
@@ -47,7 +33,7 @@ body {
   --card-width: 100%;
   --card-index: 3;
   --card-padding: 5px;
-  --card-margin: 5px;
+  --card-margin: 5px 20px;
   --card-box-shadow:  2px 3px 0px 0px rgba(0.1, 0.1, 0.1, 0.1);
   --card-header-animate-left: translateX(-15px);
   --card-header-animate-right: translateX(15px);
