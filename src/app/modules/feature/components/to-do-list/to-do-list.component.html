@@ -1,16 +1,17 @@
 <div class="card">
   <div class="card-header">
     <div class="row">
-      <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"> {{header.completed}} </div>
-      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"> {{header.title}} </div>
+      <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"> {{header.completed}} </div>
+      <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"> {{header.title}} </div>
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"> {{header.description}} </div>
       <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"> {{header.date}} </div>
-      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"> {{header.actions}} </div>
+      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"> {{header.actions}} </div>
     </div>
   </div>
 
   <div class="card-body" *ngFor="let item of toDoList">
     <ng-container
-      *ngTemplateOutlet="toDo;context:{id: item.id,isDone: item.isDone,title: item.title,date: item.endDate}">
+      *ngTemplateOutlet="toDo;context:{id: item.id,isDone: item.isDone,title: item.title,description: item.description,date: item.endDate}">
     </ng-container>
   </div>
 </div>
@@ -29,17 +30,18 @@
   </div>
 </div>
 
-<ng-template #toDo let-id="id" let-isDone="isDone" let-title="title" let-date="date">
+<ng-template #toDo let-id="id" let-isDone="isDone" let-title="title" let-description="description" let-date="date">
   <div class="card-body-content">
     <div class="row">
-      <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-          <div class="checkbox-wrapper">
+      <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+        <div class="checkbox-wrapper">
           <input type="checkbox" value="{{isDone}}" (click)="updateCompletionStatus(id)">
         </div>
       </div>
-      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"> {{title}} </div>
+      <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"> {{title}} </div>
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"> {{description}} </div>
       <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"> {{date}} </div>
-      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
         <app-common-buttons [primaryTitle]="LST_PRIMARY_BTN" [secondaryTitle]="LST_SECONDARY_BTN"
           (primaryBtnEmitted)="editSelectedToDo(id)" (secondaryBtnEmitted)="deleteSelectedToDo(id)">
         </app-common-buttons>

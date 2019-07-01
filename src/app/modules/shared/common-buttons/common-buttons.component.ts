@@ -7,6 +7,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class CommonButtonsComponent implements OnInit {
   @Input() primaryTitle: string;
   @Input() secondaryTitle: string;
+  @Input() disablePrimaryBtn = false;
 
   @Output() primaryBtnEmitted = new EventEmitter<any>();
   @Output() secondaryBtnEmitted = new EventEmitter<any>();
