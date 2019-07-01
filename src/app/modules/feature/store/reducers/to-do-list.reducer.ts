@@ -2,44 +2,54 @@ import * as fromToDoActions from '../actions/to-do-list.actions';
 import { ToDoEntity } from 'src/app/models/to-do-entity';
 
 export interface ToDoState {
-    toDos: ToDoEntity[];
+  toDos: ToDoEntity[];
 }
 
 export const initialState: ToDoState = {
-    toDos: []
-}
+  toDos: []
+};
 
 export function reducer(
-    state = initialState,
-    action: fromToDoActions.ToDoActions
+  state = initialState,
+  action: fromToDoActions.ToDoActions
 ): ToDoState {
-    switch (action.type) {
-        case fromToDoActions.ADD_TO_DO_ITEM: {
-            return {
-                ...state,
-                toDos: [...state.toDos, action.payload]
-            }
-        }
-        case fromToDoActions.EDIT_TO_DO_ITEM: {
-            return {
-                ...state,
-                toDos: [...state.toDos, action.payload]
-            }
-        }
-        case fromToDoActions.DELETE_TO_DO_ITEM: {
-            return {
-                ...state,
-                toDos: [...state.toDos.slice(0, action.payload),
-                    ...state.toDos.slice(action.payload + 1)]
-            }
-        }
-        case fromToDoActions.DELETE_ALL_TO_DO_ITEMS: {
-            return {
-                ...state,
-                toDos: []
-            }
-        }
-        default:
-            return state;
+  switch (action.type) {
+    case fromToDoActions.ADD_TO_DO_ITEM: {
+      action.payload.id = state.toDos.length;
+
+      return {
+        ...state,
+        toDos: [...state.toDos, action.payload]
+      };
     }
+    case fromToDoActions.EDIT_TO_DO_ITEM: {
+      return {
+        ...state,
+        toDos: [...state.toDos, action.payload]
+      };
+    }
+    case fromToDoActions.DELETE_TO_DO_ITEM: {
+      const item = state.toDos.findIndex(itm => itm.id === action.payload);
+
+      if (item !== -1) {
+        return {
+          ...state,
+          toDos: [...state.toDos.slice(0, item),
+          ...state.toDos.slice(item + 1)]
+        };
+      } else {
+        return {
+          ...state
+        };
+      }
+    }
+    case fromToDoActions.DELETE_ALL_TO_DO_ITEMS: {
+      return {
+        ...state,
+        toDos: []
+      };
+    }
+    default:
+      return state;
+  }
 }

@@ -69,10 +69,18 @@ body{
         margin: var(--card-margin);
 
         hr{
-          margin: 15px 0px 0px 0px; 
+          margin: 15px 0px 0px 0px;
         }
         .card-body-content{
           border-radius: 2px;
+
+          .card-button-section{
+            align-items: center;
+
+            .card-button{
+              margin: var(--card-margin);
+            }
+          }
 
           .checkbox{
             text-align: center;
