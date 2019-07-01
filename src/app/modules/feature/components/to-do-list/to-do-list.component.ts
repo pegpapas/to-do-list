@@ -3,10 +3,7 @@ import { ToDoEntity } from 'src/app/models/to-do-entity';
 import { Router } from '@angular/router';
 import { ISubscription } from 'rxjs/Subscription';
 
-import { Store, select } from '@ngrx/store';
-import * as fromActions from '../../store/actions/index';
-import * as fromReducers from '../../store/reducers/index';
-import * as fromSelectors from '../../store/selectors/index';
+import { FeatureStoreFacade } from '../../store/feature.store.facade';
 
 @Component({
   selector: 'app-to-do-list',
@@ -26,12 +23,12 @@ export class ToDoListComponent implements OnInit, OnDestroy {
   readonly LST_SECONDARY_BTN = 'Delete';
 
   constructor(private router: Router,
-              private store: Store<fromReducers.FeatureState>) { }
+              private store: FeatureStoreFacade) { }
 
   ngOnInit() {
-    this.subscription = this.store.pipe(select(fromSelectors.getToDoListState))
-      .subscribe(state => {
-        this.toDoList = state.toDos;
+    this.subscription = this.store.toDoList$
+      .subscribe(toDos => {
+        this.toDoList = toDos;
         this.checkForSuccess();
       });
   }
@@ -41,24 +38,25 @@ export class ToDoListComponent implements OnInit, OnDestroy {
   }
 
   deleteSelectedToDo(id: number) {
-    this.store.dispatch(new fromActions.DeleteToDoItem(id));
+    this.store.deleteSelectedToDo(id);
   }
 
-  editSelectedToDo(id: number) {
+  editSelectedToDo(selectedId: number) {
+    const selectedItem = this.toDoList.filter(item => item.id === selectedId)[0];
+    this.store.editSelectedToDo(selectedItem);
     this.router.navigateByUrl('/editToDo');
-    this.store.dispatch(new fromActions.EditToDoItem(id));
   }
 
   addNewToDo() {
-    this.router.navigateByUrl('/editToDo');
+    this.router.navigateByUrl('/addToDo');
   }
 
   deleteAll() {
-    this.store.dispatch(new fromActions.DeleteAllToDoItems());
+    this.store.deleteAll();
   }
 
   updateCompletionStatus(id: number) {
-    this.store.dispatch(new fromActions.CompleteToDo(id));
+    this.store.updateCompletionStatus(id);
   }
 
   checkForSuccess() {

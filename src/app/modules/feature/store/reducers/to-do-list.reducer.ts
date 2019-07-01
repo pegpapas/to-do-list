@@ -3,10 +3,12 @@ import { ToDoEntity } from 'src/app/models/to-do-entity';
 
 export interface ToDoState {
   toDos: ToDoEntity[];
+  selectedToDo: ToDoEntity;
 }
 
 export const initialState: ToDoState = {
-  toDos: []
+  toDos: [],
+  selectedToDo: null
 };
 
 export function reducer(
@@ -19,13 +21,25 @@ export function reducer(
 
       return {
         ...state,
-        toDos: [...state.toDos, action.payload]
+        toDos: [...state.toDos, action.payload],
+        selectedToDo: null
       };
     }
     case fromToDoActions.EDIT_TO_DO_ITEM: {
       return {
         ...state,
-        toDos: [...state.toDos, action.payload]
+        selectedToDo: action.payload
+      };
+    }
+    case fromToDoActions.UPDATE_TO_DO_ITEM: {
+      const item = state.toDos.findIndex(itm => itm.id === action.payload.id);
+
+      return {
+        ...state,
+        toDos: [...state.toDos.slice(0, item),
+          action.payload,
+        ...state.toDos.slice(item + 1)],
+        selectedToDo: null
       };
     }
     case fromToDoActions.DELETE_TO_DO_ITEM: {
@@ -35,7 +49,8 @@ export function reducer(
         return {
           ...state,
           toDos: [...state.toDos.slice(0, item),
-          ...state.toDos.slice(item + 1)]
+          ...state.toDos.slice(item + 1)],
+          selectedToDo: null
         };
       } else {
         return {
@@ -55,10 +70,14 @@ export function reducer(
 
       return {
         ...state,
-        toDos: newToDos
+        toDos: newToDos,
+        selectedToDo: null
       };
     }
     default:
       return state;
   }
 }
+
+export const getToDos = (state: ToDoState) => state.toDos;
+export const getSelectedToDo = (state: ToDoState) => state.selectedToDo;
