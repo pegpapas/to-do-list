@@ -71,19 +71,21 @@ body{
         hr{
           margin: 15px 0px 0px 0px;
         }
+
         .card-body-content{
           border-radius: 2px;
 
           .card-button-section{
-            align-items: center;
+            text-align: center;
 
             .card-button{
               margin: var(--card-margin);
             }
           }
 
-          .checkbox{
+          .checkbox-wrapper{
             text-align: center;
+            margin: 7% 0px 0px 0px !important;
           }
         }
       }

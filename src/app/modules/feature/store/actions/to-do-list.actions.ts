@@ -5,6 +5,7 @@ export const ADD_TO_DO_ITEM = '[To Do] ADD ITEM';
 export const EDIT_TO_DO_ITEM = '[To Do] EDIT ITEM';
 export const DELETE_TO_DO_ITEM = '[To Do] DELETE ITEM';
 export const DELETE_ALL_TO_DO_ITEMS = '[To Do] DELETE ALL ITEMS';
+export const COMPLETE_TO_DO = '[To Do] COMPLETE_TO_DO';
 
 export class AddToDoItem implements Action {
     readonly type = ADD_TO_DO_ITEM;
@@ -26,8 +27,14 @@ export class DeleteAllToDoItems implements Action {
     constructor() { }
 }
 
+export class CompleteToDo implements Action {
+  readonly type = COMPLETE_TO_DO;
+  constructor(public payload: number) { }
+}
+
 export type ToDoActions =
     AddToDoItem
     | EditToDoItem
     | DeleteToDoItem
-    | DeleteAllToDoItems;
+    | DeleteAllToDoItems
+    | CompleteToDo;

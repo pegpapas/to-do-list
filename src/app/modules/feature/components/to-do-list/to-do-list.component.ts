@@ -21,9 +21,9 @@ export class ToDoListComponent implements OnInit, OnDestroy {
   private subscription: ISubscription;
 
   readonly PRIMARY_BTN = 'Add New';
-  readonly SECONDARY_BTN  = 'Clear All';
+  readonly SECONDARY_BTN = 'Clear All';
   readonly LST_PRIMARY_BTN = 'Edit';
-  readonly LST_SECONDARY_BTN  = 'Delete';
+  readonly LST_SECONDARY_BTN = 'Delete';
 
   constructor(private router: Router,
               private store: Store<fromReducers.FeatureState>) { }
@@ -32,6 +32,7 @@ export class ToDoListComponent implements OnInit, OnDestroy {
     this.subscription = this.store.pipe(select(fromSelectors.getToDoListState))
       .subscribe(state => {
         this.toDoList = state.toDos;
+        this.checkForSuccess();
       });
   }
 
@@ -54,5 +55,15 @@ export class ToDoListComponent implements OnInit, OnDestroy {
 
   deleteAll() {
     this.store.dispatch(new fromActions.DeleteAllToDoItems());
+  }
+
+  updateCompletionStatus(id: number) {
+    this.store.dispatch(new fromActions.CompleteToDo(id));
+  }
+
+  checkForSuccess() {
+    if (this.toDoList.filter(itm => itm.isDone === true).length >= 3) {
+      alert('Hooray');
+    }
   }
 }

@@ -49,6 +49,15 @@ export function reducer(
         toDos: []
       };
     }
+    case fromToDoActions.COMPLETE_TO_DO: {
+      state.toDos.filter(itm => itm.id === action.payload)[0].isDone = !state.toDos.filter(itm => itm.id === action.payload)[0].isDone;
+      const newToDos = state.toDos;
+
+      return {
+        ...state,
+        toDos: newToDos
+      };
+    }
     default:
       return state;
   }

@@ -15,6 +15,9 @@ import * as fromSelectors from '../../store/selectors/index';
 export class EditToDoItemComponent implements OnInit {
   form: FormGroup;
 
+  readonly PRIMARY_BTN = 'Save';
+  readonly SECONDARY_BTN  = 'Cancel';
+
   constructor(private router: Router,
               private formBuilder: FormBuilder,
               private store: Store<fromReducers.FeatureState>) {
@@ -28,7 +31,7 @@ export class EditToDoItemComponent implements OnInit {
 
   ngOnInit() { }
 
-  saveNewToDo() {
+  updateToDo() {
     const { itemIsCompleted, itemTitle, itemEndDate, itemDescription } = this.form.controls;
     this.store.dispatch(new fromActions.AddToDoItem({
       id: 0, description: itemDescription.value, title: itemTitle.value, isDone: itemIsCompleted.value, endDate: itemEndDate.value
