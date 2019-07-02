@@ -24,8 +24,8 @@ export class EditToDoItemComponent implements OnInit, OnDestroy {
   readonly SECONDARY_BTN = 'Cancel';
 
   constructor(private router: Router,
-    private formBuilder: FormBuilder,
-    private store: FeatureStoreFacade) {
+              private formBuilder: FormBuilder,
+              private store: FeatureStoreFacade) {
     this.form = this.formBuilder.group({
       itemIsCompleted: ['', null],
       itemTitle: ['', null],
