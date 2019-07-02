@@ -1,11 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { take, map, debounceTime } from 'rxjs/operators';
 import { ISubscription } from 'rxjs/Subscription';
 
-import { Store, select } from '@ngrx/store';
-import * as fromActions from '../../store/actions/index';
 import { ToDoEntity } from 'src/app/models/to-do-entity';
 import { FeatureStoreFacade } from '../../store/feature.store.facade';
 
@@ -48,7 +45,7 @@ export class EditToDoItemComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  setForm() {
+  setForm(): void {
     const { itemIsCompleted, itemTitle, itemEndDate, itemDescription } = this.form.controls;
     itemIsCompleted.setValue(this.selectedItem.isDone);
     itemTitle.setValue(this.selectedItem.title);
@@ -56,7 +53,7 @@ export class EditToDoItemComponent implements OnInit, OnDestroy {
     itemDescription.setValue(this.selectedItem.description);
   }
 
-  valueChangeHandler() {
+  valueChangeHandler(): void {
     const { itemTitle, itemEndDate } = this.form.controls;
 
     if (this.selectedItem != null && this.selectedItem !== undefined) {
@@ -67,7 +64,7 @@ export class EditToDoItemComponent implements OnInit, OnDestroy {
     }
   }
 
-  updateToDo() {
+  updateToDo(): void {
     const { itemIsCompleted, itemTitle, itemEndDate, itemDescription } = this.form.controls;
 
     const item: ToDoEntity = {
@@ -85,7 +82,7 @@ export class EditToDoItemComponent implements OnInit, OnDestroy {
     this.cancel();
   }
 
-  cancel() {
+  cancel(): void {
     this.router.navigateByUrl('/');
   }
 

@@ -29,7 +29,7 @@ export class ToDoListComponent implements OnInit, OnDestroy {
     this.subscription = this.store.toDoList$
       .subscribe(toDos => {
         this.toDoList = toDos;
-        this.checkForSuccess();
+        setTimeout(() => { this.checkForSuccess(); });
       });
   }
 
@@ -41,28 +41,29 @@ export class ToDoListComponent implements OnInit, OnDestroy {
     this.store.deleteSelectedToDo(id);
   }
 
-  editSelectedToDo(selectedId: number) {
+  editSelectedToDo(selectedId: number): void {
     const selectedItem = this.toDoList.filter(item => item.id === selectedId)[0];
     this.store.editSelectedToDo(selectedItem);
     this.router.navigateByUrl('/editToDo');
   }
 
-  addNewToDo() {
+  addNewToDo(): void {
     this.store.editSelectedToDo(null);
     this.router.navigateByUrl('/addToDo');
   }
 
-  deleteAll() {
+  deleteAll(): void {
     this.store.deleteAll();
   }
 
-  updateCompletionStatus(id: number) {
+  updateCompletionStatus(id: number): void {
     this.store.updateCompletionStatus(id);
   }
 
-  checkForSuccess() {
-    if (this.toDoList.filter(itm => itm.isDone === true).length >= 3) {
-      alert('Hooray');
+  checkForSuccess(): void {
+    const toDosCompleted = this.toDoList.filter(itm => itm.isDone === true).length;
+    if (toDosCompleted >= 3) {
+      alert('Hooray ' + toDosCompleted + ' to dos completed!!');
     }
   }
 }
