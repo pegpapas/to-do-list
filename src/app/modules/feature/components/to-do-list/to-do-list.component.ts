@@ -48,6 +48,7 @@ export class ToDoListComponent implements OnInit, OnDestroy {
   }
 
   addNewToDo() {
+    this.store.editSelectedToDo(null);
     this.router.navigateByUrl('/addToDo');
   }
 
