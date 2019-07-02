@@ -12,14 +12,15 @@
           </div>
           <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
             <div class="form-group">
-              <input type="text" class="form-control" id="form_style" formControlName="itemTitle" autocomplete="off"
-                placeholder="Title (required)" required>
+              <input type="text" class="form-control" formControlName="itemTitle" (blur)="valueChangeHandler()"
+                autocomplete="off" placeholder="Title (required)" required>
             </div>
           </div>
           <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
             <div class="form-group">
-              <input type="text" class="form-control" id="form_style" formControlName="itemEndDate" autocomplete="off"
-                placeholder="End Date (required)" required>
+              <kendo-datepicker class="form-control" formControlName="itemEndDate" (valueChange)="valueChangeHandler()"
+                [min]="minDate" required ngDefaultControl>
+              </kendo-datepicker>
             </div>
           </div>
           <div class="col-lg-12 col-md-12 col-sm-12 mb-12">
@@ -39,8 +40,8 @@
     <div class="card-body-content">
       <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 mb-12">
-          <app-common-buttons [primaryTitle]="PRIMARY_BTN" [secondaryTitle]="SECONDARY_BTN" [disablePrimaryBtn]="!form.valid"
-            (primaryBtnEmitted)="updateToDo()" (secondaryBtnEmitted)="cancel()">
+          <app-common-buttons [primaryTitle]="PRIMARY_BTN" [secondaryTitle]="SECONDARY_BTN"
+            [disablePrimaryBtn]="disablePrimaryBtn" (primaryBtnEmitted)="updateToDo()" (secondaryBtnEmitted)="cancel()">
           </app-common-buttons>
         </div>
       </div>

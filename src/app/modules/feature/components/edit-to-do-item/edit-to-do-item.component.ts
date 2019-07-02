@@ -16,14 +16,16 @@ import { FeatureStoreFacade } from '../../store/feature.store.facade';
 export class EditToDoItemComponent implements OnInit, OnDestroy {
   form: FormGroup;
   selectedItem: ToDoEntity = null;
+  minDate = new Date();
+  disablePrimaryBtn = true;
   private subscription: ISubscription;
 
   readonly PRIMARY_BTN = 'Save';
   readonly SECONDARY_BTN = 'Cancel';
 
   constructor(private router: Router,
-              private formBuilder: FormBuilder,
-              private store: FeatureStoreFacade) {
+    private formBuilder: FormBuilder,
+    private store: FeatureStoreFacade) {
     this.form = this.formBuilder.group({
       itemIsCompleted: ['', null],
       itemTitle: ['', null],
@@ -54,8 +56,20 @@ export class EditToDoItemComponent implements OnInit, OnDestroy {
     itemDescription.setValue(this.selectedItem.description);
   }
 
+  valueChangeHandler() {
+    const { itemTitle, itemEndDate } = this.form.controls;
+
+    if (this.selectedItem != null && this.selectedItem !== undefined) {
+      this.disablePrimaryBtn = (this.selectedItem.title === itemTitle.value
+        && Date.parse(this.selectedItem.endDate) === Date.parse(itemEndDate.value));
+    } else {
+      this.disablePrimaryBtn = !(itemTitle.value && itemEndDate.value);
+    }
+  }
+
   updateToDo() {
     const { itemIsCompleted, itemTitle, itemEndDate, itemDescription } = this.form.controls;
+
     const item: ToDoEntity = {
       id: 0, description: itemDescription.value,
       title: itemTitle.value, isDone: itemIsCompleted.value, endDate: itemEndDate.value

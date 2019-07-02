@@ -40,7 +40,7 @@
       </div>
       <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"> {{title}} </div>
       <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"> {{description}} </div>
-      <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"> {{date}} </div>
+      <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"> {{date | date: 'MM/dd/yyyy'}} </div>
       <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
         <app-common-buttons [primaryTitle]="LST_PRIMARY_BTN" [secondaryTitle]="LST_SECONDARY_BTN"
           (primaryBtnEmitted)="editSelectedToDo(id)" (secondaryBtnEmitted)="deleteSelectedToDo(id)">
